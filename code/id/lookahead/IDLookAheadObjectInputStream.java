@@ -16,8 +16,7 @@ import code.id.IdGenerator;
  */
 public class IDLookAheadObjectInputStream extends ObjectInputStream {
 
-	public IDLookAheadObjectInputStream(InputStream inputStream)
-			throws IOException {
+	public IDLookAheadObjectInputStream(InputStream inputStream) throws IOException {
 		super(inputStream);
 	}
 
@@ -25,11 +24,12 @@ public class IDLookAheadObjectInputStream extends ObjectInputStream {
 	 * Only deserialize instances of our expected IDGenerator class
 	 */
 	@Override
-	protected Class<?> resolveClass(ObjectStreamClass oDser) throws IOException,
-			ClassNotFoundException {
-		if (!oDser.getName().equals(IdGenerator.class.getName())) {
-			throw new InvalidClassException(
-					"Unauthorized deserialization attempt", oDser.getName());
+	protected Class<?> resolveClass(ObjectStreamClass oDser) throws IOException, ClassNotFoundException {
+		if (!oDser.getName().equals(IdGenerator.class.getName())
+				&& !oDser.getName().equals(java.util.HashMap.class.getName())
+				&& !oDser.getName().equals(Integer.class.getName())
+				&& !oDser.getName().equals(Number.class.getName())) {
+			throw new InvalidClassException("Unauthorized deserialization attempt", oDser.getName());
 		}
 		return super.resolveClass(oDser);
 	}

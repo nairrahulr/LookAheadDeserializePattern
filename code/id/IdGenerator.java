@@ -56,7 +56,7 @@ public class IdGenerator implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 42L;
 	
-	public final String defaultKey = "ccsm";
+	public final String defaultKey = "defaultSerialKey";
 	public static String serialFilePath = "./idList.ser";
 	public HashMap<String, Integer> idList = new HashMap<String, Integer>();
 	
@@ -187,24 +187,28 @@ public class IdGenerator implements java.io.Serializable {
 
 		catch (FileNotFoundException ex) {
 			System.out.println("FileNotFoundException is caught!");
+			System.out.println(ex.getMessage());
 		}
 		
 		catch (EOFException ex) {
 			System.out.println("EOFException is caught!");
 			System.out.println("Object is not serialized or got corrupted!");
+			System.out.println(ex.getMessage());
 		}
 		
 		catch(StreamCorruptedException ex){
 			System.out.println("StreamCorruptedException is caught!");
 			System.out.println("Object is not serialized properly or got corrupted!");
+			System.out.println(ex.getMessage());
 		}
 		
 		catch (IOException ex) {
-			System.out.println("IOException is caught!");
+			System.out.println(ex.getMessage());
 		}
 
 		catch (ClassNotFoundException ex) {
 			System.out.println("ClassNotFoundException is caught!");
+			System.out.println(ex.getMessage());
 		}
 		
 		finally{
